@@ -1,4 +1,4 @@
-# wx-vue-testAdmin
+# wx-vue-admin
 
 > vue  element axios vuex
 
