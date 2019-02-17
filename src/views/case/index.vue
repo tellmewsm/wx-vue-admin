@@ -135,7 +135,7 @@
 <script>
 import domain from '../domain.js'
 export default {
-  data () {
+  data() {
     return {
       form: {
         Jdomain: '',
@@ -155,7 +155,7 @@ export default {
   },
   methods: {
     // || 或者
-    actionyongli (Jmethod, Jurl, Jdomain, Jprotocol,
+    actionyongli(Jmethod, Jurl, Jdomain, Jprotocol,
       Jduration, Jrampup, Jthread, Jrequest, Jcontent, Jcheck) {
       if (Jmethod === '' || Jurl === '' || Jdomain === '' || Jprotocol === '' || Jduration === '' ||
         Jrampup === '' || Jthread === '' || Jrequest === '' || Jcontent === '') {
@@ -178,7 +178,7 @@ export default {
         }
       }
     },
-    lookreport (application, transaction, time, to) {
+    lookreport(application, transaction, time, to) {
       if (to === '') {
         alert('持续时间不能存在为空')
         return false
@@ -196,12 +196,12 @@ export default {
         this.report7 = domain.testUrljmeter + '?refresh=' + time + '&from=' + timestamp + '&to=' + timestamp1 + '&orgId=1&panelId=39&var-data_source=Jmeter&var-application=' + application + '&var-transaction=' + transaction + '&var-measurement_name=jmeter&var-send_interval=5&theme=light'
       }
     },
-    resetForm () {
+    resetForm() {
       if (this.show) { this.show = false } else {
         this.show = true
       }
     },
-    next () {
+    next() {
       if (this.form.step++ > 2) this.form.step = 0
     }
   }
