@@ -56,14 +56,14 @@ const filters = {
   completed: todos => todos.filter(todo => todo.done)
 }
 const defalutList = [
-  { text: '自定义接口执行压测并监控', done: true },
-  { text: '根据前端自动生成jmx', done: false },
-  { text: '运行jmx,单个多个jmx', done: true },
-  { text: 'springboot 集成 redis $参数 使用缓存替换', done: false },
-  { text: 'easy mock 替换成springboot登录接口', done: false },
-  { text: 'vue集成 jvm监控内容', done: true },
-  { text: 'jmx 加入性能指标', done: true },
-  { text: 'vue 控制docker容器hosts', done: false }
+  { text: 'Https接口测试、结果入库', done: true },
+  { text: 'jmeter压力测试，支持jmx上传', done: true },
+  { text: 'Grafana监控性能指标、实时监控', done: true },
+  { text: 'mysql数据入库，引用redis', done: true },
+  { text: 'easy mock登录改成spring本地接口', done: true },
+  { text: 'jmx压测脚本模版，自定义并生成', done: false },
+  { text: 'jmeter集群压力测试开发', done: false },
+  { text: '中间件、创建docker镜像', done: false }
 ]
 export default {
   components: { Todo },
