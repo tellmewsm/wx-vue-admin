@@ -2,26 +2,41 @@
   <section class="todoapp">
     <!-- header -->
     <header class="header">
-      <input class="new-todo" autocomplete="off" placeholder="Todo List" @keyup.enter="addTodo">
+      <input class="new-todo"
+             autocomplete="off"
+             placeholder="Todo List"
+             @keyup.enter="addTodo">
     </header>
     <!-- main section -->
-    <section class="main" v-show="todos.length">
-      <input class="toggle-all" id="toggle-all" type="checkbox" :checked="allChecked" @change="toggleAll({ done: !allChecked })">
+    <section class="main"
+             v-show="todos.length">
+      <input class="toggle-all"
+             id="toggle-all"
+             type="checkbox"
+             :checked="allChecked"
+             @change="toggleAll({ done: !allChecked })">
       <label for="toggle-all"></label>
       <ul class="todo-list">
-        <todo @toggleTodo='toggleTodo' @editTodo='editTodo' @deleteTodo='deleteTodo' v-for="(todo, index) in filteredTodos" :key="index"
-          :todo="todo"></todo>
+        <todo @toggleTodo='toggleTodo'
+              @editTodo='editTodo'
+              @deleteTodo='deleteTodo'
+              v-for="(todo, index) in filteredTodos"
+              :key="index"
+              :todo="todo"></todo>
       </ul>
     </section>
     <!-- footer -->
-    <footer class="footer" v-show="todos.length">
+    <footer class="footer"
+            v-show="todos.length">
       <span class="todo-count">
         <strong>{{ remaining }}</strong>
         {{ remaining | pluralize('item') }} left
       </span>
       <ul class="filters">
-        <li v-for="(val, key) in filters" :key="key">
-          <a :class="{ selected: visibility === key }" @click.prevent="visibility = key">{{ key | capitalize }}</a>
+        <li v-for="(val, key) in filters"
+            :key="key">
+          <a :class="{ selected: visibility === key }"
+             @click.prevent="visibility = key">{{ key | capitalize }}</a>
         </li>
       </ul>
       <!-- <button class="clear-completed" v-show="todos.length > remaining" @click="clearCompleted">
@@ -42,7 +57,7 @@ const filters = {
 }
 const defalutList = [
   { text: '自定义接口执行压测并监控', done: true },
-  { text: '上传并解析jmx,根据前端生成jmx', done: false },
+  { text: '根据前端自动生成jmx', done: false },
   { text: '运行jmx,单个多个jmx', done: true },
   { text: 'springboot 集成 redis $参数 使用缓存替换', done: false },
   { text: 'easy mock 替换成springboot登录接口', done: false },
@@ -117,5 +132,5 @@ export default {
 </script>
 
 <style lang="scss">
-  @import './index.scss';
+@import "./index.scss";
 </style>

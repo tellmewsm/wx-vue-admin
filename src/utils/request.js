@@ -3,19 +3,22 @@ import { Message, MessageBox } from 'element-ui'
 import store from '../store'
 import { getToken } from '@/utils/auth'
 
-// 单写api引用request，坐到全局拦截
-
-// 创建axios实例
+// axios实例,单写api引用request，坐到全局拦截
 // 使用easy-mock服务，可以获取mock数据
 // 单独写api倒入这个request.js
 const service = axios.create({
   baseURL: process.env.BASE_API, // api的base_url
   timeout: 5000 // 请求超时时间
+  // headers: {
+  // "Content-Type": "application/x-www-form-urlencoded"
+  // },
 })
+
 // request拦截器
 service.interceptors.request.use(config => {
   if (store.getters.token) {
     config.headers['X-Token'] = getToken() // 让每个请求携带自定义token 请根据实际情况自行修改
+    // config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
   }
   return config
 }, error => {
@@ -28,11 +31,11 @@ service.interceptors.request.use(config => {
 service.interceptors.response.use(
   response => {
     // return response.data
-  /**
-  * code为非20000是抛错 可结合自己业务进行修改
-  * 下面的注释为通过response自定义code来标示请求状态，当code返回如下情况为权限有问题，登出并返回到登录页
-  * 如通过xmlhttprequest 状态码标识 逻辑可写在下面error中
-  */
+    /**
+    * code为非20000是抛错 可结合自己业务进行修改
+    * 下面的注释为通过response自定义code来标示请求状态，当code返回如下情况为权限有问题，登出并返回到登录页
+    * 如通过xmlhttprequest 状态码标识 逻辑可写在下面error中
+    */
     const res = response.data
     if (res.code !== 20000) {
       Message({

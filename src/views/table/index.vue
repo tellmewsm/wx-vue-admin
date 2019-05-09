@@ -1,23 +1,25 @@
 <template>
   <div>
-    <el-input
-    type="textarea"
-    :autosize="{ minRows: 5, maxRows: 20}"
-    placeholder="请输入需要加解密的内容"
-    v-model="input">
-  </el-input>
-  <el-row>
-    <el-button type="primary" round v-on:click="desdecrypt">DES解密</el-button>
-    <el-button type="primary"  round v-on:click="desencrypt">DES加密</el-button>
-  </el-row>
-  <div style="margin: 10px 0;"></div>
-  <el-input 
-  type="textarea"
-  :autosize="{ minRows: 5, maxRows: 20}"
-  placeholder="加密解密输出内容地方"
-  v-model="output">
-</el-input>
-</div>
+    <el-input type="textarea"
+              :autosize="{ minRows: 5, maxRows: 20}"
+              placeholder="请输入需要加解密的内容"
+              v-model="input">
+    </el-input>
+    <el-row>
+      <el-button type="primary"
+                 round
+                 v-on:click="desdecrypt">DES解密</el-button>
+      <el-button type="primary"
+                 round
+                 v-on:click="desencrypt">DES加密</el-button>
+    </el-row>
+    <div style="margin: 10px 0;"></div>
+    <el-input type="textarea"
+              :autosize="{ minRows: 5, maxRows: 20}"
+              placeholder="加密解密输出内容地方"
+              v-model="output">
+    </el-input>
+  </div>
 </template> 
 
 <script>

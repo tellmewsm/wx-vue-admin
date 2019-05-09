@@ -1,135 +1,250 @@
 <template>
-<div>
+  <div>
 
-<!-- <h4>脚本属性</h4> -->
-<div>
-  <el-form ref="form" :model="form" label-width="80px" class="demo-form-inline" :inline="true">
-     <el-form-item label="脚本名称" required="required">
-    <el-select v-model="value" placeholder="请选择jmx项目">
-      <el-option 
-      v-for="item in options"
-      :key="item.lJmx"
-      :label="item.lJmx"
-      :value="item.lJmx"></el-option>
-    </el-select>
-  </el-form-item>
-  <el-form-item label="应用默认" required="required">
-    <el-select v-model="form.application" placeholder="请选择application名称">
-      <el-option label="application" value="application"></el-option>
-    </el-select>
-  </el-form-item>
-   <el-form-item label="时间间隔" required="required">
-    <el-select v-model="form.time" placeholder="刷新时间间隔">
-      <el-option label="5s" value="5s"></el-option>
-      <el-option label="10s" value="10s"></el-option>
-      <el-option label="30s" value="30s"></el-option>
-      <el-option label="1m" value="1m"></el-option>
-    </el-select>
-  </el-form-item>
-  <el-form-item label="线程名" required="required">
-    <!-- <el-select v-model="form.transaction" placeholder="请选择线程名">
+    <!-- <h4>脚本属性</h4> -->
+    <div>
+      <el-form ref="form"
+               :model="form"
+               label-width="80px"
+               class="demo-form-inline"
+               :inline="true">
+        <el-form-item label="脚本名称"
+                      required="required">
+          <el-select v-model="value"
+                     placeholder="请选择jmx项目">
+            <el-option v-for="item in options"
+                       :key="item.lJmx"
+                       :label="item.lJmx"
+                       :value="item.lJmx"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="应用默认"
+                      required="required">
+          <el-select v-model="form.application"
+                     placeholder="请选择application名称">
+            <el-option label="application"
+                       value="application"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="时间间隔"
+                      required="required">
+          <el-select v-model="form.time"
+                     placeholder="刷新时间间隔">
+            <el-option label="5s"
+                       value="5s"></el-option>
+            <el-option label="10s"
+                       value="10s"></el-option>
+            <el-option label="30s"
+                       value="30s"></el-option>
+            <el-option label="1m"
+                       value="1m"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="线程名"
+                      required="required">
+          <!-- <el-select v-model="form.transaction" placeholder="请选择线程名">
       <el-option label="7101" value="7101"></el-option>
     </el-select> -->
-     <el-form-item  required="required">
-    <el-input v-model="form.transaction" placeholder="如：输入7101" ></el-input>
-  </el-form-item>
-  </el-form-item>
-   <el-button size="medium" type="primary" @click="actionjmx(value)" plain>执行脚本</el-button>
-   <el-button size="medium" type="primary" @click="resetForm();lookreport(form.application, form.transaction,form.time)" plain>性能指标</el-button>
-</el-form>
-</div>
+          <el-form-item required="required">
+            <el-input v-model="form.transaction"
+                      placeholder="如：输入7101"></el-input>
+          </el-form-item>
+        </el-form-item>
+        <el-button size="medium"
+                   type="primary"
+                   @click="actionjmx(value)"
+                   plain>执行脚本</el-button>
+        <el-button size="medium"
+                   type="primary"
+                   @click="resetForm();lookreport(form.application, form.transaction,form.time)"
+                   plain>性能指标</el-button>
+      </el-form>
+    </div>
 
-<!-- 负载机性能 -->
-<div>
-  <el-form ref="form" :model="machine" label-width="80px" class="demo-form-inline" :inline="true">
-  <el-form-item label="负载机器" required="required">
-    <el-select v-model="machine.host" placeholder="负载机hostname">
-      <el-option label="localhost.localdomain" value="localhost.localdomain"></el-option>
-    </el-select>
-  </el-form-item>
-    <el-form-item label="时间间隔" required="required">
-    <el-select v-model="machine.time" placeholder="刷新时间间隔">
-      <el-option label="5s" value="5s"></el-option>
-      <el-option label="10s" value="10s"></el-option>
-      <el-option label="30s" value="30s"></el-option>
-      <el-option label="1m" value="1m"></el-option>
-    </el-select>
-  </el-form-item>
-  <el-button size="medium" type="primary" @click="watchjvm();lookmachine(machine.host,machine.time)" plain>负载机器服务器指标</el-button>
-</el-form>
-</div>
+    <!-- 负载机性能 -->
+    <div>
+      <el-form ref="form"
+               :model="machine"
+               label-width="80px"
+               class="demo-form-inline"
+               :inline="true">
+        <el-form-item label="负载机器"
+                      required="required">
+          <el-select v-model="machine.host"
+                     placeholder="负载机hostname">
+            <el-option label="localhost.localdomain"
+                       value="localhost.localdomain"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="时间间隔"
+                      required="required">
+          <el-select v-model="machine.time"
+                     placeholder="刷新时间间隔">
+            <el-option label="5s"
+                       value="5s"></el-option>
+            <el-option label="10s"
+                       value="10s"></el-option>
+            <el-option label="30s"
+                       value="30s"></el-option>
+            <el-option label="1m"
+                       value="1m"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-button size="medium"
+                   type="primary"
+                   @click="watchjvm();lookmachine(machine.host,machine.time)"
+                   plain>负载机器服务器指标</el-button>
+      </el-form>
+    </div>
 
-<!-- <h4>监控属性</h4> -->
-<div>
-  <el-form ref="form" :model="machine" label-width="80px" class="demo-form-inline" :inline="true">
-  <el-form-item label="服务器名" required="required">
-    <!-- <el-select v-model="machine.host" placeholder="请选择服务器名">
+    <!-- <h4>监控属性</h4> -->
+    <div>
+      <el-form ref="form"
+               :model="machine"
+               label-width="80px"
+               class="demo-form-inline"
+               :inline="true">
+        <el-form-item label="服务器名"
+                      required="required">
+          <!-- <el-select v-model="machine.host" placeholder="请选择服务器名">
       <el-option label="user-test-ay" value="user-test-ay"></el-option>
     </el-select> -->
-         <el-form-item  required="required">
-    <el-input v-model="machine.host1" placeholder="输入服务器hostname" ></el-input>
-  </el-form-item>
-  </el-form-item>
-    <el-form-item label="时间间隔" required="required">
-    <el-select v-model="machine.time1" placeholder="刷新时间间隔">
-      <el-option label="5s" value="5s"></el-option>
-      <el-option label="10s" value="10s"></el-option>
-      <el-option label="30s" value="30s"></el-option>
-      <el-option label="1m" value="1m"></el-option>
-    </el-select>
-  </el-form-item>
-  <el-button size="medium" type="primary" @click="watchjvm();lookmachine(machine.host1,machine.time1)" plain>被测项目服务器指标</el-button>
-</el-form>
-</div>
+          <el-form-item required="required">
+            <el-input v-model="machine.host1"
+                      placeholder="输入服务器hostname"></el-input>
+          </el-form-item>
+        </el-form-item>
+        <el-form-item label="时间间隔"
+                      required="required">
+          <el-select v-model="machine.time1"
+                     placeholder="刷新时间间隔">
+            <el-option label="5s"
+                       value="5s"></el-option>
+            <el-option label="10s"
+                       value="10s"></el-option>
+            <el-option label="30s"
+                       value="30s"></el-option>
+            <el-option label="1m"
+                       value="1m"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-button size="medium"
+                   type="primary"
+                   @click="watchjvm();lookmachine(machine.host1,machine.time1)"
+                   plain>被测项目服务器指标</el-button>
+      </el-form>
+    </div>
 
-<!-- <h4>接口性能</h4> -->
+    <!-- <h4>接口性能</h4> -->
 
-<div v-if="show">
-<iframe v-bind:src="report1" width="450" height="200" frameborder="0"></iframe>
-<iframe v-bind:src="report2" width="450" height="200" frameborder="0"></iframe>
-<iframe v-bind:src="report3" width="450" height="200" frameborder="0"></iframe>
-</div>
+    <div v-if="show">
+      <iframe v-bind:src="report1"
+              width="450"
+              height="200"
+              frameborder="0"></iframe>
+      <iframe v-bind:src="report2"
+              width="450"
+              height="200"
+              frameborder="0"></iframe>
+      <iframe v-bind:src="report3"
+              width="450"
+              height="200"
+              frameborder="0"></iframe>
+    </div>
 
-<div v-if="show">
-<iframe v-bind:src="report4" width="450" height="200" frameborder="0"></iframe>
-<iframe v-bind:src="report5" width="450" height="200" frameborder="0"></iframe>
-<iframe v-bind:src="report6" width="450" height="200" frameborder="0"></iframe>
-</div>
+    <div v-if="show">
+      <iframe v-bind:src="report4"
+              width="450"
+              height="200"
+              frameborder="0"></iframe>
+      <iframe v-bind:src="report5"
+              width="450"
+              height="200"
+              frameborder="0"></iframe>
+      <iframe v-bind:src="report6"
+              width="450"
+              height="200"
+              frameborder="0"></iframe>
+    </div>
 
+    <div v-if="show">
+      <iframe v-bind:src="report7"
+              width="1350"
+              height="300"
+              frameborder="0"></iframe>
+    </div>
 
-<div v-if="show">
-<iframe v-bind:src="report7" width="1350" height="300" frameborder="0"></iframe>
-</div>
+    <!-- <h4>服务器性能</h4> -->
 
-<!-- <h4>服务器性能</h4> -->
+    <div v-if="show1">
+      <iframe v-bind:src="machine1"
+              width="135"
+              height="120"
+              frameborder="0"></iframe>
+      <iframe v-bind:src="machine2"
+              width="135"
+              height="120"
+              frameborder="0"></iframe>
+      <iframe v-bind:src="machine3"
+              width="135"
+              height="120"
+              frameborder="0"></iframe>
+      <iframe v-bind:src="machine4"
+              width="135"
+              height="120"
+              frameborder="0"></iframe>
+      <iframe v-bind:src="machine5"
+              width="135"
+              height="120"
+              frameborder="0"></iframe>
+      <iframe v-bind:src="machine6"
+              width="135"
+              height="120"
+              frameborder="0"></iframe>
+      <iframe v-bind:src="machine7"
+              width="135"
+              height="120"
+              frameborder="0"></iframe>
+      <iframe v-bind:src="machine8"
+              width="135"
+              height="120"
+              frameborder="0"></iframe>
+      <iframe v-bind:src="machine9"
+              width="135"
+              height="120"
+              frameborder="0"></iframe>
+      <iframe v-bind:src="machine10"
+              width="135"
+              height="120"
+              frameborder="0"></iframe>
+    </div>
 
-<div v-if="show1">
-<iframe v-bind:src="machine1" width="135" height="120" frameborder="0"></iframe>
-<iframe v-bind:src="machine2"  width="135" height="120" frameborder="0"></iframe>
-<iframe v-bind:src="machine3"  width="135" height="120" frameborder="0"></iframe>
-<iframe v-bind:src="machine4"  width="135" height="120" frameborder="0"></iframe>
-<iframe v-bind:src="machine5"  width="135" height="120" frameborder="0"></iframe>
-<iframe v-bind:src="machine6"  width="135" height="120" frameborder="0"></iframe>
-<iframe v-bind:src="machine7"  width="135" height="120" frameborder="0"></iframe>
-<iframe v-bind:src="machine8"  width="135" height="120" frameborder="0"></iframe>
-<iframe v-bind:src="machine9"  width="135" height="120" frameborder="0"></iframe>
-<iframe v-bind:src="machine10"  width="135" height="120" frameborder="0"></iframe>
-</div>
+    <div v-if="show1">
+      <iframe v-bind:src="machine11"
+              width="1350"
+              height="200"
+              frameborder="0"></iframe>
+    </div>
 
-<div v-if="show1">
-<iframe v-bind:src="machine11"  width="1350" height="200" frameborder="0"></iframe>
-</div>
+    <div v-if="show1">
+      <iframe v-bind:src="machine12"
+              width="675"
+              height="200"
+              frameborder="0"></iframe>
+      <iframe v-bind:src="machine13"
+              width="675"
+              height="200"
+              frameborder="0"></iframe>
+    </div>
 
-<div v-if="show1">
-<iframe v-bind:src="machine12"  width="675" height="200" frameborder="0"></iframe>
-<iframe v-bind:src="machine13"  width="675" height="200" frameborder="0"></iframe>
-</div>
+    <div v-if="show1">
+      <iframe v-bind:src="machine14"
+              width="1350"
+              height="200"
+              frameborder="0"></iframe>
+    </div>
 
-<div v-if="show1">
-<iframe v-bind:src="machine14"  width="1350" height="200" frameborder="0"></iframe>
-</div>
-
-</div>
+  </div>
 </template>
 
 <script>
@@ -246,11 +361,9 @@ export default {
 </script>
 
 <style scoped>
-
-h4{
-background-color:#678;
-color:rgb(226, 217, 235)
+h4 {
+  background-color: #678;
+  color: rgb(226, 217, 235);
 }
-
 </style>
 
